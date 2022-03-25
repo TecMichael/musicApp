@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:vgym/constants.dart';
+
+import 'caetgory_tabs.dart';
+import 'music_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -54,82 +55,115 @@ class HomeScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(defaultPadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Best Songs',
-              style: Theme.of(context)
-                  .textTheme
-                  .headline5!
-                  .copyWith(fontWeight: FontWeight.w700, color: Colors.black),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const MusicList(
-                    txt: 'Time of Our lives',
-                    img: 'assets/images/product_2.png',
-                    mtime: '3:20',
-                    txt2: 'Kathryn Stantiago',
+                  CategoryTab(
+                    title: 'Trending',
+                    press: () {},
+                    isActive: true,
                   ),
-                  const SizedBox(height: 10),
-                  const MusicList(
-                    txt: 'Dont Stop The Party',
-                    img: 'assets/images/product_2.png',
-                    mtime: '4:20',
-                    txt2: 'Estelle Patterson',
+                  CategoryTab(
+                    title: 'Music',
+                    press: () {},
                   ),
-                  SizedBox(height: 12.h),
-                  const MusicList(
-                    txt: 'Let me Love You',
-                    img: 'assets/images/product_2.png',
-                    mtime: '5:25',
-                    txt2: 'Kathryn Stantiago',
+                  CategoryTab(
+                    title: 'Funny',
+                    press: () {},
                   ),
-                  SizedBox(height: 12.h),
-                  const MusicList(
-                    txt: 'Give me Everything',
-                    img: 'assets/images/product_2.png',
-                    mtime: '3:40',
-                    txt2: 'Kathryn Stantiago',
+                  CategoryTab(
+                    title: 'Exclamation',
+                    press: () {},
                   ),
-                  SizedBox(height: 12.h),
-                  const MusicList(
-                    txt: 'Hey Baby',
-                    img: 'assets/images/product_2.png',
-                    mtime: '3:20',
-                    txt2: 'Estelle Patterson',
+                  CategoryTab(
+                    title: 'Nature',
+                    press: () {},
                   ),
-                  SizedBox(height: 12.h),
-                  const MusicList(
-                    txt: 'Back in Time',
-                    img: 'assets/images/product_2.png',
-                    mtime: '3:20',
-                    txt2: 'Corey Morton',
+                  CategoryTab(
+                    title: 'Animal',
+                    press: () {},
                   ),
-                  SizedBox(height: 12.h),
-                  const MusicList(
-                    txt: 'Shut Down',
-                    img: 'assets/images/product_2.png',
-                    mtime: '4:20',
-                    txt2: 'Kathryn Stantiago',
+                  CategoryTab(
+                    title: 'Quote',
+                    press: () {},
                   ),
-                  SizedBox(height: 12.h),
-                  const MusicList(
-                    txt: 'Echa Palla',
-                    img: 'assets/images/product_2.png',
-                    mtime: '3:20',
-                    txt2: 'Corey Morton',
+                  CategoryTab(
+                    title: 'Greeting',
+                    press: () {},
                   ),
                 ],
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              children: [
+                const MusicList(
+                  txt: 'Time of Our lives',
+                  img: 'assets/images/product_2.png',
+                  mtime: '3:20',
+                  txt2: 'Kathryn Stantiago',
+                ),
+                SizedBox(height: 10.h),
+                const MusicList(
+                  txt: 'Dont Stop The Party',
+                  img: 'assets/images/product_2.png',
+                  mtime: '4:20',
+                  txt2: 'Estelle Patterson',
+                ),
+                SizedBox(height: 12.h),
+                const MusicList(
+                  txt: 'Let me Love You',
+                  img: 'assets/images/product_2.png',
+                  mtime: '5:25',
+                  txt2: 'Kathryn Stantiago',
+                ),
+                SizedBox(height: 12.h),
+                const MusicList(
+                  txt: 'Give me Everything',
+                  img: 'assets/images/product_2.png',
+                  mtime: '3:40',
+                  txt2: 'Kathryn Stantiago',
+                ),
+                SizedBox(height: 12.h),
+                const MusicList(
+                  txt: 'Hey Baby',
+                  img: 'assets/images/product_2.png',
+                  mtime: '3:20',
+                  txt2: 'Estelle Patterson',
+                ),
+                SizedBox(height: 12.h),
+                const MusicList(
+                  txt: 'Back in Time',
+                  img: 'assets/images/product_2.png',
+                  mtime: '3:20',
+                  txt2: 'Corey Morton',
+                ),
+                SizedBox(height: 12.h),
+                const MusicList(
+                  txt: 'Shut Down',
+                  img: 'assets/images/product_2.png',
+                  mtime: '4:20',
+                  txt2: 'Kathryn Stantiago',
+                ),
+                SizedBox(height: 12.h),
+                const MusicList(
+                  txt: 'Echa Palla',
+                  img: 'assets/images/product_2.png',
+                  mtime: '3:20',
+                  txt2: 'Corey Morton',
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
@@ -158,78 +192,6 @@ class BottomNavItem extends StatelessWidget {
             color: isActive ? Colors.blue : Colors.black,
           )
         ],
-      ),
-    );
-  }
-}
-
-class MusicList extends StatelessWidget {
-  const MusicList({
-    Key? key,
-    required this.img,
-    required this.txt,
-    required this.txt2,
-    required this.mtime,
-  }) : super(key: key);
-  final String img;
-  final String txt;
-  final String txt2;
-  final String mtime;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade100,
-            blurRadius: 6.5,
-            offset: const Offset(1, 9),
-          ),
-        ],
-      ),
-      child: ListTile(
-        leading: Container(
-          height: 70.h,
-          width: 80.w,
-          decoration: BoxDecoration(
-            color: Colors.grey,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(defaultBorderRadius - 5),
-            ),
-            image:
-                DecorationImage(image: AssetImage(img), fit: BoxFit.fitWidth),
-          ),
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        title: Text(
-          txt,
-          style: GoogleFonts.roboto(
-              fontSize: 17.sp,
-              fontWeight: FontWeight.w500,
-              color: Colors.black),
-        ),
-        subtitle: Text(
-          txt2,
-        ),
-        onTap: () {},
-        dense: true,
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              mtime,
-              style: TextStyle(color: Colors.grey.shade600),
-            ),
-            const SizedBox(width: 13),
-            SvgPicture.asset(
-              'assets/icons/play.svg',
-              color: Colors.blue,
-            ),
-          ],
-        ),
       ),
     );
   }
