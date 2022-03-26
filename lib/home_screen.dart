@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'bottom_bar.dart';
 import 'caetgory_tabs.dart';
 import 'music_list.dart';
 
@@ -58,49 +59,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  CategoryTab(
-                    title: 'Trending',
-                    press: () {},
-                    isActive: true,
-                  ),
-                  CategoryTab(
-                    title: 'Music',
-                    press: () {},
-                  ),
-                  CategoryTab(
-                    title: 'Funny',
-                    press: () {},
-                  ),
-                  CategoryTab(
-                    title: 'Exclamation',
-                    press: () {},
-                  ),
-                  CategoryTab(
-                    title: 'Nature',
-                    press: () {},
-                  ),
-                  CategoryTab(
-                    title: 'Animal',
-                    press: () {},
-                  ),
-                  CategoryTab(
-                    title: 'Quote',
-                    press: () {},
-                  ),
-                  CategoryTab(
-                    title: 'Greeting',
-                    press: () {},
-                  ),
-                ],
-              ),
-            ),
-          ),
+          const CategoriesList(),
           SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
@@ -169,30 +128,3 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class BottomNavItem extends StatelessWidget {
-  const BottomNavItem({
-    Key? key,
-    required this.svgSrc,
-    required this.press,
-    this.isActive = false,
-  }) : super(key: key);
-  final String svgSrc;
-  final VoidCallback press;
-  final bool isActive;
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: press,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          SvgPicture.asset(
-            svgSrc,
-            height: 25,
-            color: isActive ? Colors.blue : Colors.black,
-          )
-        ],
-      ),
-    );
-  }
-}

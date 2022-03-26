@@ -1,38 +1,63 @@
 import 'package:flutter/material.dart';
 
-class CategoryTab extends StatelessWidget {
-  const CategoryTab({
-    Key? key,
-    required this.title,
-    this.isActive = false,
-    required this.press,
-  }) : super(key: key);
-  final String title;
-  final bool isActive;
-  final VoidCallback press;
+class CategoriesList extends StatefulWidget {
+  const CategoriesList({Key? key}) : super(key: key);
+
+  @override
+  State<CategoriesList> createState() => _CategoriesListState();
+}
+
+class _CategoriesListState extends State<CategoriesList> {
+  List<String> categories = [
+    'Trending',
+    'Music',
+    'Funny',
+    'Exclamation',
+    'Nature',
+    'Animal',
+    'Quote',
+    'Greeting'
+  ];
+  int selcetedIndex = 0;
   @override
   Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: SizedBox(
+        height: 25,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: categories.length,
+          itemBuilder: (BuildContext context, int index) => buildCategory(index),
+        ),
+      ),
+    );
+  }
+
+  Widget buildCategory(int index) {
     return GestureDetector(
-      onTap: press,
+      onTap: () {
+        setState(() {
+          selcetedIndex = index;
+        });
+      },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title,
-                style: isActive
-                    ? const TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold)
-                    : const TextStyle(fontSize: 13,fontWeight: FontWeight.w400)),
-            if (isActive)
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 5),
-                height: 3,
-                width: 35,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              )
+            Text(
+              categories[index],
+              style: TextStyle(
+                  color: selcetedIndex == index ? Colors.blue : Colors.grey,
+                  fontWeight: FontWeight.w500),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 3),
+              height: 2,
+              width: 30,
+              color: selcetedIndex == index ? Colors.blue : Colors.transparent,
+            )
           ],
         ),
       ),
