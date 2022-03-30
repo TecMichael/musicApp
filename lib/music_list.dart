@@ -1,3 +1,4 @@
+import 'package:audioplayer/audioplayer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -5,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'constants.dart';
 
-class MusicList extends StatelessWidget {
+class MusicList extends StatefulWidget {
   const MusicList({
     Key? key,
     required this.img,
@@ -17,6 +18,43 @@ class MusicList extends StatelessWidget {
   final String txt;
   final String txt2;
   final String mtime;
+
+  @override
+  State<MusicList> createState() => _MusicListState();
+}
+
+class _MusicListState extends State<MusicList> {
+  AudioPlayer audioPlayer = AudioPlayer();
+
+  AudioPlayerState audioPlayerState = AudioPlayerState.PAUSED;
+
+  String url = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3';
+
+  @override
+  void initState() {
+    super.initState();
+
+    audioPlayer.onPlayerStateChanged.listen((AudioPlayerState s) {
+      setState(() {
+        audioPlayerState = s;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    audioPlayer.pause();
+    audioPlayer.stop();
+  }
+
+  playMusic() async {
+    await audioPlayer.play(url);
+  }
+
+  pauseMusic() async {
+    await audioPlayer.pause();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,22 +77,22 @@ class MusicList extends StatelessWidget {
             borderRadius: const BorderRadius.all(
               Radius.circular(defaultBorderRadius - 5),
             ),
-            image:
-                DecorationImage(image: AssetImage(img), fit: BoxFit.fitWidth),
+            image: DecorationImage(
+                image: AssetImage(widget.img), fit: BoxFit.fitWidth),
           ),
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
         title: Text(
-          txt,
+          widget.txt,
           style: GoogleFonts.roboto(
               fontSize: 17.sp,
               fontWeight: FontWeight.w500,
               color: Colors.black),
         ),
         subtitle: Text(
-          txt2,
+          widget.txt2,
         ),
         onTap: () {},
         dense: true,
@@ -62,14 +100,20 @@ class MusicList extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              mtime,
+              widget.mtime,
               style: TextStyle(color: Colors.grey.shade600),
             ),
             const SizedBox(width: 13),
-            SvgPicture.asset(
-              'assets/icons/play.svg',
-              color: Colors.blue,
-            ),
+            // IconButton(
+            //   onPressed: () {
+            //     audioPlayerState == AudioPlayerState.PLAYING
+            //         ? pauseMusic()
+            //         : playMusic();
+            //   },
+            //   icon: Icon(audioPlayerState == AudioPlayerState.PLAYING
+            //       ? Icons.pause_rounded
+            //       : Icons.play_arrow_rounded),
+            // )
           ],
         ),
       ),

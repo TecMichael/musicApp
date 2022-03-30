@@ -1,13 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:vgym/screens/categories/music.dart';
 import 'bottom_bar.dart';
-import 'caetgory_tabs.dart';
 import 'music_list.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+  final PageController _controller = PageController();
+  List<String> title = [
+    'Trending',
+    'Music',
+    'Funny',
+    'Exclamation',
+    'Nature',
+    'Animal',
+    'Quote',
+    'Greeting'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -59,72 +76,137 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CategoriesList(),
-          SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            child: SizedBox(
+              height: 25,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: title.length,
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) =>
+                    buildCategory(index),
+              ),
+            ),
+          ),
+          Expanded(
+            child: PageView(
+              controller: _controller,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
               children: [
-                const MusicList(
-                  txt: 'Time of Our lives',
-                  img: 'assets/images/product_2.png',
-                  mtime: '3:20',
-                  txt2: 'Kathryn Stantiago',
-                ),
-                SizedBox(height: 10.h),
-                const MusicList(
-                  txt: 'Dont Stop The Party',
-                  img: 'assets/images/product_2.png',
-                  mtime: '4:20',
-                  txt2: 'Estelle Patterson',
-                ),
-                SizedBox(height: 12.h),
-                const MusicList(
-                  txt: 'Let me Love You',
-                  img: 'assets/images/product_2.png',
-                  mtime: '5:25',
-                  txt2: 'Kathryn Stantiago',
-                ),
-                SizedBox(height: 12.h),
-                const MusicList(
-                  txt: 'Give me Everything',
-                  img: 'assets/images/product_2.png',
-                  mtime: '3:40',
-                  txt2: 'Kathryn Stantiago',
-                ),
-                SizedBox(height: 12.h),
-                const MusicList(
-                  txt: 'Hey Baby',
-                  img: 'assets/images/product_2.png',
-                  mtime: '3:20',
-                  txt2: 'Estelle Patterson',
-                ),
-                SizedBox(height: 12.h),
-                const MusicList(
-                  txt: 'Back in Time',
-                  img: 'assets/images/product_2.png',
-                  mtime: '3:20',
-                  txt2: 'Corey Morton',
-                ),
-                SizedBox(height: 12.h),
-                const MusicList(
-                  txt: 'Shut Down',
-                  img: 'assets/images/product_2.png',
-                  mtime: '4:20',
-                  txt2: 'Kathryn Stantiago',
-                ),
-                SizedBox(height: 12.h),
-                const MusicList(
-                  txt: 'Echa Palla',
-                  img: 'assets/images/product_2.png',
-                  mtime: '3:20',
-                  txt2: 'Corey Morton',
-                ),
+                // musicList(),
+                musicList(),
+                musicList(),
+                musicList(),
+                const MusicCategory(),
+                musicList(),
+                musicList(),
+                musicList(),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
-}
 
+  Widget musicList() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Column(
+        children: [
+           const MusicList(
+            txt: 'Time of Our lives',
+            img: 'assets/images/product_2.png',
+            mtime: '3:20',
+            txt2: 'Kathryn Stantiago',
+          ),
+          SizedBox(height: 10.h),
+           const MusicList(
+            txt: 'Dont Stop The Party',
+            img: 'assets/images/product_2.png',
+            mtime: '4:20',
+            txt2: 'Estelle Patterson',
+          ),
+          SizedBox(height: 12.h),
+           const MusicList(
+            txt: 'Let me Love You',
+            img: 'assets/images/product_2.png',
+            mtime: '5:25',
+            txt2: 'Kathryn Stantiago',
+          ),
+          SizedBox(height: 12.h),
+           const MusicList(
+            txt: 'Give me Everything',
+            img: 'assets/images/product_2.png',
+            mtime: '3:40',
+            txt2: 'Kathryn Stantiago',
+          ),
+          SizedBox(height: 12.h),
+           const MusicList(
+            txt: 'Hey Baby',
+            img: 'assets/images/product_2.png',
+            mtime: '3:20',
+            txt2: 'Estelle Patterson',
+          ),
+          SizedBox(height: 12.h),
+           const MusicList(
+            txt: 'Back in Time',
+            img: 'assets/images/product_2.png',
+            mtime: '3:20',
+            txt2: 'Corey Morton',
+          ),
+          SizedBox(height: 12.h),
+           const MusicList(
+            txt: 'Shut Down',
+            img: 'assets/images/product_2.png',
+            mtime: '4:20',
+            txt2: 'Kathryn Stantiago',
+          ),
+          SizedBox(height: 12.h),
+           const MusicList(
+            txt: 'Echa Palla',
+            img: 'assets/images/product_2.png',
+            mtime: '3:20',
+            txt2: 'Corey Morton',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildCategory(int index) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _currentIndex = index;
+          _controller.jumpToPage(index);
+        });
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title[index],
+              style: TextStyle(
+                  color: _currentIndex == index ? Colors.blue : Colors.grey,
+                  fontWeight: FontWeight.w500),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 3),
+              height: 2,
+              width: 30,
+              color: _currentIndex == index ? Colors.blue : Colors.transparent,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
