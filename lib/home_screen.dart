@@ -119,56 +119,56 @@ class _HomeScreenState extends State<HomeScreen> {
       scrollDirection: Axis.vertical,
       child: Column(
         children: [
-           const MusicList(
+            MusicList(
             txt: 'Time of Our lives',
             img: 'assets/images/product_2.png',
             mtime: '3:20',
             txt2: 'Kathryn Stantiago',
           ),
           SizedBox(height: 10.h),
-           const MusicList(
+            MusicList(
             txt: 'Dont Stop The Party',
             img: 'assets/images/product_2.png',
             mtime: '4:20',
             txt2: 'Estelle Patterson',
           ),
           SizedBox(height: 12.h),
-           const MusicList(
+            MusicList(
             txt: 'Let me Love You',
             img: 'assets/images/product_2.png',
             mtime: '5:25',
             txt2: 'Kathryn Stantiago',
           ),
           SizedBox(height: 12.h),
-           const MusicList(
+            MusicList(
             txt: 'Give me Everything',
             img: 'assets/images/product_2.png',
             mtime: '3:40',
             txt2: 'Kathryn Stantiago',
           ),
           SizedBox(height: 12.h),
-           const MusicList(
+            MusicList(
             txt: 'Hey Baby',
             img: 'assets/images/product_2.png',
             mtime: '3:20',
             txt2: 'Estelle Patterson',
           ),
           SizedBox(height: 12.h),
-           const MusicList(
+            MusicList(
             txt: 'Back in Time',
             img: 'assets/images/product_2.png',
             mtime: '3:20',
             txt2: 'Corey Morton',
           ),
           SizedBox(height: 12.h),
-           const MusicList(
+            MusicList(
             txt: 'Shut Down',
             img: 'assets/images/product_2.png',
             mtime: '4:20',
             txt2: 'Kathryn Stantiago',
           ),
           SizedBox(height: 12.h),
-           const MusicList(
+            MusicList(
             txt: 'Echa Palla',
             img: 'assets/images/product_2.png',
             mtime: '3:20',

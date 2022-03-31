@@ -1,4 +1,4 @@
-import 'package:audioplayer/audioplayer.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,11 +13,14 @@ class MusicList extends StatefulWidget {
     required this.txt,
     required this.txt2,
     required this.mtime,
+     this.musicFile,
+
   }) : super(key: key);
   final String img;
   final String txt;
   final String txt2;
   final String mtime;
+  final String? musicFile;
 
   @override
   State<MusicList> createState() => _MusicListState();
@@ -26,15 +29,17 @@ class MusicList extends StatefulWidget {
 class _MusicListState extends State<MusicList> {
   AudioPlayer audioPlayer = AudioPlayer();
 
-  AudioPlayerState audioPlayerState = AudioPlayerState.PAUSED;
+  PlayerState audioPlayerState = PlayerState.PAUSED;
+  String? url;
 
-  String url = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3';
+
 
   @override
   void initState() {
     super.initState();
+     url = 'https://www.slimsic.com/web/media/${widget.musicFile}';
 
-    audioPlayer.onPlayerStateChanged.listen((AudioPlayerState s) {
+    audioPlayer.onPlayerStateChanged.listen((PlayerState s) {
       setState(() {
         audioPlayerState = s;
       });
@@ -49,7 +54,7 @@ class _MusicListState extends State<MusicList> {
   }
 
   playMusic() async {
-    await audioPlayer.play(url);
+    await audioPlayer.play(url!);
   }
 
   pauseMusic() async {
@@ -104,16 +109,16 @@ class _MusicListState extends State<MusicList> {
               style: TextStyle(color: Colors.grey.shade600),
             ),
             const SizedBox(width: 13),
-            // IconButton(
-            //   onPressed: () {
-            //     audioPlayerState == AudioPlayerState.PLAYING
-            //         ? pauseMusic()
-            //         : playMusic();
-            //   },
-            //   icon: Icon(audioPlayerState == AudioPlayerState.PLAYING
-            //       ? Icons.pause_rounded
-            //       : Icons.play_arrow_rounded),
-            // )
+            IconButton(
+              onPressed: () {
+                audioPlayerState == PlayerState.PLAYING
+                    ? pauseMusic()
+                    : playMusic();
+              },
+              icon: Icon(audioPlayerState == PlayerState.PLAYING
+                  ? Icons.pause_rounded
+                  : Icons.play_arrow_rounded),
+            )
           ],
         ),
       ),

@@ -57,6 +57,7 @@ class _MusicCategoryState extends State<MusicCategory> {
             img: 'assets/images/product_2.png',
             mtime: '3:20',
             txt2: '${data.data![index].source}',
+            musicFile: data.data![index].file,
           );
         },
       ),
