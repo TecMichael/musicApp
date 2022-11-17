@@ -118,7 +118,7 @@ class _MusicListState extends State<MusicList> {
                   ),
                   IconButton(
                     onPressed: () {
-                        data.downloadLocally(widget.musicFile);
+                        data.downloadLocally(widget.musicFile,context);
                     },
                     icon: Icon( Icons.share,size: 18
                       ,color: Colors.deepOrangeAccent,),

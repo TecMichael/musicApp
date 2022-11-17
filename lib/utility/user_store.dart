@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:another_flushbar/flushbar.dart';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
@@ -26,6 +27,8 @@ class UserStore extends ChangeNotifier {
 
   PlayerState audioPlayerState = PlayerState.PAUSED;
   Note? currentlyPlayingNote;
+
+  bool? isShareLoading=false;
 
   void fetchCurrentUser( ) async{
     SignInResponse response =await cacheHelper.getCurrentUser();
@@ -60,13 +63,14 @@ class UserStore extends ChangeNotifier {
   Future<void> shareFile(filePath) async {
 
     await FlutterShare.shareFile(
-      title: 'Example share',
-      text: 'Example share text',
+      title: 'Slimsic',
+      text: 'Exchange audio in an interesting way on slimsic',
       filePath: filePath as String,
     );
   }
 
- Future downloadLocally(url) async{
+ Future downloadLocally(url,context) async{
+    isShareLoading=true;notifyListeners();
       debugPrint(url);
     try{
 
@@ -77,11 +81,23 @@ class UserStore extends ChangeNotifier {
      String? result=await ApiService().downloadFile(url, targetFileName, targetPath);
      if(result.contains("Error")){
        debugPrint(result);
+       Flushbar(
+         message: 'Oops an error occured!',
+         duration: Duration(seconds: 1),
+       ).show(context);
      }else{
+
        shareFile(result);
      }
+      isShareLoading=false;notifyListeners();
+
     }
     catch(e){
+      isShareLoading=false;notifyListeners();
+      Flushbar(
+        message: 'Oops an error occured!',
+        duration: Duration(seconds: 1),
+      ).show(context);
       debugPrint(e.toString());
     }
 
