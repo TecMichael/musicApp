@@ -1,15 +1,23 @@
+import 'package:vgym/model/responses/home_response.dart';
+
 class MyNotesModel {
   bool? error;
-  List<Data>? data;
-
-  MyNotesModel({this.error, this.data});
+  List<Note>? data;
+  List<Category>? categories;
+  MyNotesModel({this.error, this.data,this.categories});
 
   MyNotesModel.fromJson(Map<String, dynamic> json) {
     error = json['error'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <Note>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(Note.fromJson(v));
+      });
+    }
+    if (json['categories'] != null) {
+      categories = <Category>[];
+      json['categories'].forEach((v) {
+        categories!.add(Category.fromJson(v));
       });
     }
   }
@@ -20,31 +28,37 @@ class MyNotesModel {
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
+    if (this.categories != null) {
+      data['categories'] = this.categories!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
 
-class Data {
+class Note {
   String? id;
   String? source;
   String? phrase;
   String? file;
+  String? title;
   String? categoryId;
   String? categoryName;
 
-  Data(
+  Note(
       {this.id,
       this.source,
       this.phrase,
       this.file,
+        this.title,
       this.categoryId,
       this.categoryName});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Note.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     source = json['source'];
     phrase = json['phrase'];
     file = json['file'];
+    title = json['title'];
     categoryId = json['category_id'];
     categoryName = json['category_name'];
   }
@@ -55,6 +69,7 @@ class Data {
     data['source'] = source;
     data['phrase'] = phrase;
     data['file'] = file;
+    data['title'] = title;
     data['category_id'] = categoryId;
     data['category_name'] = categoryName;
     return data;

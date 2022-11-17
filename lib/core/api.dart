@@ -9,9 +9,30 @@ var urls = BaseUrl();
 
 class Api extends BaseApi {
   @override
-  Future<MyNotesModel> myNoteApi() async {
+  Future<MyNotesModel> myNoteApi(id) async {
     try {
-      final response = await http.get(Uri.parse(urls.notesUrl));
+      final response = await http.get(Uri.parse(urls.notesUrl+id));
+      print(response);
+
+      if (response.statusCode == 200) {
+        var convert = json.decode(response.body);
+        MyNotesModel myNote = MyNotesModel.fromJson(convert);
+        return myNote;
+      } else {
+        return MyNotesModel(error: true);
+      }
+    } catch (e) {
+      debugPrint('$e');
+      return MyNotesModel(error: true);
+    }
+  }
+
+  @override
+  Future<MyNotesModel> searchNotes(query) async {
+    try {
+
+      final response = await http.get(Uri.parse(urls.searchNotesUrl+query));
+      print(urls.searchNotesUrl+query);
 
       if (response.statusCode == 200) {
         var convert = json.decode(response.body);

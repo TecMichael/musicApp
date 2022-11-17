@@ -2,8 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>NSAppleMusicUsageDescription</key>
+    <string>Slimsic needs music permission</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>Slimsic needs to access to the microphone to record audio file</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Slimsic would like to save photos from the app to your gallery</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Slimsic would like to access your photo gallery for uploading images to the app</string>
 	<key>CFBundleDisplayName</key>
 	<string>Music App</string>
 	<key>CFBundleExecutable</key>
@@ -43,5 +51,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIBackgroundModes</key>
+    <array>
+       <string>fetch</string>
+       <string>remote-notification</string>
+    </array>
+
 </dict>
 </plist>
