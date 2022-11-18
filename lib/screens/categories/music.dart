@@ -9,7 +9,8 @@ class MusicCategory extends StatefulWidget {
   String? id;
   bool? scrollAssist;
   String? searchQuery;
-  MusicCategory({Key? key,this.id,this.scrollAssist,this.searchQuery}) : super(key: key);
+  MusicCategory({Key? key, this.id, this.scrollAssist, this.searchQuery})
+      : super(key: key);
 
   @override
   State<MusicCategory> createState() => _MusicCategoryState();
@@ -20,11 +21,11 @@ class _MusicCategoryState extends State<MusicCategory> {
 
   @override
   void initState() {
-    if(widget.searchQuery!=null){
+    if (widget.searchQuery != null) {
       // its a search
       notes = Api().searchNotes(widget.searchQuery);
       print(widget.searchQuery);
-    }else{
+    } else {
       // its a category
       notes = Api().myNoteApi(widget.id);
     }
@@ -33,7 +34,7 @@ class _MusicCategoryState extends State<MusicCategory> {
 
   @override
   Widget build(BuildContext context) {
-    if(widget.searchQuery!=null){
+    if (widget.searchQuery != null) {
       // its a search
       notes = Api().searchNotes(widget.searchQuery);
       print(widget.searchQuery);
@@ -45,7 +46,10 @@ class _MusicCategoryState extends State<MusicCategory> {
           case ConnectionState.none:
             return const Center();
           case ConnectionState.waiting:
-            return const Center(child:  CircularProgressIndicator(color: Colors.orange,));
+            return const Center(
+                child: CircularProgressIndicator(
+              color: Colors.orange,
+            ));
           case ConnectionState.active:
             return const Center();
           case ConnectionState.done:
@@ -54,15 +58,13 @@ class _MusicCategoryState extends State<MusicCategory> {
                 child: Text('Unable to get Music List. Kindly Refresh'),
               );
             } else if (snapshot.hasData) {
-              if(snapshot.data!.data==null){
-                return Center(child: const Text('No Result Found'));
-              }else{
-                if(snapshot.data!.data!.isEmpty){
-                  return Center(child: const Text('No Result Found'));
-
-                }else{
+              if (snapshot.data!.data == null) {
+                return const Center(child: Text('No Result Found'));
+              } else {
+                if (snapshot.data!.data!.isEmpty) {
+                  return const Center(child: Text('No Result Found'));
+                } else {
                   return musicWidget(snapshot.data!);
-
                 }
               }
             } else {
@@ -77,7 +79,9 @@ class _MusicCategoryState extends State<MusicCategory> {
     return ListView.builder(
       itemCount: data.data!.length,
       shrinkWrap: widget.scrollAssist!,
-      physics: widget.scrollAssist!?NeverScrollableScrollPhysics():AlwaysScrollableScrollPhysics(),
+      physics: widget.scrollAssist!
+          ? const NeverScrollableScrollPhysics()
+          : const AlwaysScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         return MusicList(
           txt: '${data.data![index].title}',
@@ -86,7 +90,7 @@ class _MusicCategoryState extends State<MusicCategory> {
           txt2: '${data.data![index].source}',
           txt3: '${data.data![index].phrase}',
           musicFile: data.data![index].file,
-          note:data.data![index] ,
+          note: data.data![index],
         );
       },
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:vgym/dashboard.dart';
 import 'package:vgym/home_screen.dart';
 
 import 'audio_module/screens/home_screen/cubit/record/record_cubit.dart';
@@ -49,10 +50,10 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             fontFamily: "Gordita",
           ),
-          home:  HomeScreen(),
+          home:  DashBoardScreen(),
           // home: SplashScreen(),
           // We use routeName so that we dont need to remember the name
-          initialRoute: HomeScreen.routeName,
+          // initialRoute: HomeScreen.routeName,
           routes: routes,
         )
 

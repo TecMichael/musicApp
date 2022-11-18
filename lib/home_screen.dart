@@ -1,15 +1,9 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:vgym/audio_module/screens/home_screen/home_screen.dart';
 import 'package:vgym/model/responses/home_response.dart';
 import 'package:vgym/screens/categories/music.dart';
 import 'package:vgym/utility/user_store.dart';
-import 'bottom_bar.dart';
-import 'music_list.dart';
-import 'screens/choose_record_option.dart';
 import 'screens/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -36,38 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomNavigationBar: Container(
-      //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      //   height: 60,
-      //   color: Colors.white,
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //     children: [
-      //       BottomNavItem(
-      //         press: () {},
-      //         svgSrc: 'assets/icons/home.svg',
-      //         isActive: true,
-      //       ),
-      //       BottomNavItem(
-      //         press: () {},
-      //         svgSrc: 'assets/icons/search2.svg',
-      //       ),
-      //       BottomNavItem(
-      //         press: () {},
-      //         svgSrc: 'assets/icons/copy.svg',
-      //       ),
-      //       BottomNavItem(
-      //         press: () {},
-      //         svgSrc: 'assets/icons/fave.svg',
-      //       ),
-      //     ],
-      //   ),
-      // ),
       appBar: AppBar(
         backgroundColor: Colors.indigo,
         automaticallyImplyLeading: false,
         elevation: 0,
-        title: Text('Slimsic'),
+        title: const Text('Slimsic'),
         centerTitle: true,
         // leading: IconButton(
         //   onPressed: () {},
@@ -77,33 +44,37 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             onPressed: () {
               showModalBottomSheet(
-                  context: context,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  backgroundColor: Colors.white,
-                  isScrollControlled: true,
-                  isDismissible: true,
-                  builder: (context) {
-                    return FractionallySizedBox(
-                      heightFactor: 0.8,
-                        child: Column(
-                          children: [
-                            SizedBox(height: 15,),
-                            Container(
-                              height:3,
-                              width: 90,
-                              decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(20)
-                              ),
-                            ),
-                            SizedBox(height: 15,),
-
-                            Expanded(child: SearchScreen()),
-                          ],
-                        ));
-                  });
+                context: context,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                backgroundColor: Colors.white,
+                isScrollControlled: true,
+                isDismissible: true,
+                builder: (context) {
+                  return FractionallySizedBox(
+                    heightFactor: 0.8,
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          height: 3,
+                          width: 90,
+                          decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(20)),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        const Expanded(child: SearchScreen()),
+                      ],
+                    ),
+                  );
+                },
+              );
             },
             icon: const Icon(
               Icons.search,
@@ -156,7 +127,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: PageView.builder(
                     itemCount: data.categoryList.length,
                     itemBuilder: (ctx, pos) {
-                      return MusicCategory(id: data.categoryList[pos].id,scrollAssist: false,);
+                      return MusicCategory(
+                        id: data.categoryList[pos].id,
+                        scrollAssist: false,
+                      );
                     },
                     controller: _controller,
                     onPageChanged: (index) {
@@ -174,10 +148,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? Container()
                   : Container(
                       height: 80,
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 20),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 25, vertical: 20),
                       decoration: BoxDecoration(
                           color: Colors.indigo.shade500,
                           borderRadius: BorderRadius.circular(15)),
@@ -186,17 +160,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 'Now Playing',
                                 style: TextStyle(color: Colors.white70),
                               ),
                               Text(data.currentlyPlayingNote!.title!,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w500))
                             ],
                           ),
-                          Spacer(),
+                          const Spacer(),
                           IconButton(
                             onPressed: () {
                               data.currentlyPlayingNote == null
